@@ -132,12 +132,12 @@ achievable_betters = []
 converse_madcs = []
 converse_betters = []
 
-iters = 15
-Lambda_global = 15
-r_global = 2
-for a in range(1, iters):
-    achievable_madc, achievable_better = achievable_bounds(Lambda_global, a, r_global)
-    converse_madc, converse_better = converse_bounds(Lambda_global, a, r_global)
+alpha_limit = 15
+Lambda = 15
+r = 2
+for a in range(1, alpha_limit):
+    achievable_madc, achievable_better = achievable_bounds(Lambda, a, r)
+    converse_madc, converse_better = converse_bounds(Lambda, a, r)
 
     achievable_madcs.append(achievable_madc)
     achievable_betters.append(achievable_better)
@@ -148,18 +148,18 @@ import matplotlib.pyplot as plt
 
 range_begin = 2
 fig, ax = plt.subplots(figsize = (7, 4))
-plt.plot(range(range_begin, iters), achievable_madcs[range_begin - 1:],
+plt.plot(range(range_begin, alpha_limit), achievable_madcs[range_begin - 1:],
          color = "#0000ff", label="MADC Achievable", marker = 'o')
-plt.plot(range(range_begin, iters), converse_madcs[range_begin - 1:],
+plt.plot(range(range_begin, alpha_limit), converse_madcs[range_begin - 1:],
          color = "#0000ff", label="MADC Converse", marker = 'o')
-plt.plot(range(range_begin, iters), achievable_betters[range_begin - 1:],
+plt.plot(range(range_begin, alpha_limit), achievable_betters[range_begin - 1:],
          color = "#ff0000", label="Improved Achievable", marker = 'o')
-plt.plot(range(range_begin, iters), converse_betters[range_begin - 1:],
+plt.plot(range(range_begin, alpha_limit), converse_betters[range_begin - 1:],
          color = "#ff0000", label="Improved Converse", marker = 'o')
 
 plt.ylim(bottom = 0)
 plt.xlabel("α")
-plt.xticks(range(range_begin, iters))
+plt.xticks(range(range_begin, alpha_limit))
 plt.ylabel("Max-link communication load")
 plt.title("Comparison of bounds, Λ = 15, r = 2")
 plt.legend()
